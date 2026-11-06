@@ -51,6 +51,12 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
             userId = authentication.getPrincipal();
         }
 
+        log.info("Request started requestId={} method={} path={} userId={}",
+                requestId,
+                request.getMethod(),
+                request.getRequestURI(),
+                userId
+        );
         return true;
     }
 
@@ -72,5 +78,13 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
 
         String requestId = (String) request.getAttribute(REQUEST_ID);
 
+        log.info(
+                "Request completed requestId={} method={} path={} status={} durationMs={}",
+                requestId,
+                request.getMethod(),
+                request.getRequestURI(),
+                response.getStatus(),
+                durationMs
+        );
     }
 }
